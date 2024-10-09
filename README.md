@@ -1,52 +1,56 @@
 # Set Cover Problem - Lab 1
 
-## Overview
-
-This project solves the **Set Cover Problem**, a classical NP-complete problem in combinatorics and computational theory. The objective is to find a minimum-cost subset of sets that covers all elements in a given universe.
-
-**Lab Requirements**:  
-- Given a large **universe** of elements (`UNIVERSE_SIZE`) and a collection of **subsets** (`NUM_SETS`), the goal is to find a combination of subsets such that every element in the universe is covered by at least one subset.
-- Each subset has an associated **cost**, and the goal is to **minimize the total cost** of the selected subsets.
-
-**Input Specifications**:  
-1. A binary matrix `SETS` where each row represents a subset and each column corresponds to elements in the universe.  
-2. A `COSTS` array, where each entry represents the cost of including that subset in the solution.  
-
-**Output Requirements**:  
-- A list of selected subsets that cover all elements in the universe.
-- The total cost of the solution.
-
 ## Problem Statement
 
-![alt text](image.png)
+This lab required solving instances of the Set Cover Problem with varying universe sizes, number of sets, and densities. The objective was to implement a solution that efficiently handles these variations and reports the initial and final fitness values.
+
+![Set Cover Problem Description](image.png)
 
 The goal is to **find the minimum-cost subfamily of `S`** such that the union of these subsets covers `U`.
 
 ## Approach
 
-### Greedy Approach
-- Start by selecting the subset that covers the most uncovered elements per unit cost.
-- Continue adding subsets until all elements in `U` are covered.
+The implemented Tabu Search algorithm for the Set Cover Problem includes:
 
-### Local Search
-- Once a solution is found, refine it using local search by swapping or removing subsets to reduce cost while maintaining full coverage.
+- **Dynamic Tabu List**: Starts with an initial size and grows as the search progresses, balancing between exploration and exploitation.
+- **Aspiration Criteria**: Allows accepting moves in the tabu list if they lead to a solution better than the best found so far.
+- **Multiple Mutation**: Generates diverse neighborhood solutions by potentially flipping multiple bits in the solution representation.
+- **Fitness Tracking**: Monitors and stores the fitness of solutions throughout the search process.
+- **Multi-Instance Testing**: Applies the algorithm to multiple problem instances with varying parameters, demonstrating its adaptability to different problem scales.
+- **Results Visualization**: Provides graphical representation of the algorithm's performance for each instance, aiding in analysis and comparison.
 
-### Metaheuristics
-- Apply **Iterated Local Search (ILS)** or **Tabu Search** to escape local optima and find better solutions iteratively.
+The solution was tested across multiple instances, demonstrating its effectiveness in finding optimal or near-optimal solutions.
 
-## Implementation Details
+## Results
 
-### File Structure
-- `set_cover.ipynb`: Main Jupyter Notebook containing the code and implementation.
-- `README.md`: This file, explaining the approach and results.
-- `LICENSE.md`: License details (if required).
+| Instance | Universe Size | Num Sets | Density | Initial Fitness | Final Fitness |
+|----------|---------------|----------|---------|-----------------|---------------|
+| 1        | 100           | 10       | 0.2     | -29.9648       |   0            |
+| 2        | 1,000         | 100      | 0.2     | -14241.1775  |  -6409.3919     |
+| 3        | 10,000         | 1,000     | 0.2    | -1243184.90   | -571303.45     |
+| 4        | 10,0000         | 10,000     | 0.1    | -74629161.782  | -74629161.78218833    |
+| 5        | 100,000         | 10,000     | 0.2    | -165060887.250   |    waiting for the ans     |
+| 6        | 100,000         | 10,000     | 0.3    |           |               |
 
-### Running the Code
-1. Clone this repository.
-2. Open the `set_cover.ipynb` notebook.
-3. Run each cell step-by-step to reproduce the results.
 
-```python
-# Example code snippet to demonstrate usage:
-solution = greedy_initial_solution(SETS, COSTS)
-print(f"Initial Solution Cost: {cost(solution)}")
+## Performance Analysis
+
+- The algorithm consistently improved the initial random solutions.
+- Larger instances (100,000 universe size) required significantly more computation time.
+- Density variations impacted the ease of finding valid solutions.
+
+## Challenges and Optimizations
+
+- **Memory Management**: Implemented efficient data structures for large instances.
+- **Runtime Optimization**: Used vectorized operations where possible.
+- **Parameter Tuning**: Adjusted tabu list size and mutation rate for different instance sizes.
+- **Biggest Challenge**: testing the algo on 100,000 universe size on my 6-year-old laptop was like using the free version of ChatGPT during peak hours. 
+
+
+## Acknowledgments
+
+For this Computational Intelligence lab submission, I explored various resources. While ChatGPT is a popular choice, I decided to give Claude AI a chance, and it proved to be a great help. As always, Google was my trusty companion throughout the process.
+
+## References
+
+1. Glover, F. (1989). Tabu Search—Part I. ORSA Journal on Computing.
