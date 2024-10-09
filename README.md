@@ -29,13 +29,13 @@ The solution was tested across multiple instances, demonstrating its effectivene
 | 2        | 1,000         | 100      | 0.2     | -14241.1775  |  -6409.3919     |
 | 3        | 10,000         | 1,000     | 0.2    | -1243184.90   | -571303.45     |
 | 4        | 10,0000         | 10,000     | 0.1    | -74629161.782  | -74629161.78218833    |
-| 5        | 100,000         | 10,000     | 0.2    | -165060887.250   |    waiting for the ans     |
-| 6        | 100,000         | 10,000     | 0.3    |           |               |
+| 5        | 100,000         | 10,000     | 0.2    | -165060887.250   |  -165014923.3968753)    |
+| 6        | 100,000         | 10,000     | 0.3    |   -252231834.97        |               |
 
 
 ## Performance Analysis
 
-- The algorithm consistently improved the initial random solutions.
+- The algorithm consistently improved the initial random solutions, the algorithm doesn't work well for 100,000. Haven't figured out why yet. 
 - Larger instances (100,000 universe size) required significantly more computation time.
 - Density variations impacted the ease of finding valid solutions.
 
